@@ -41,6 +41,8 @@ Benchmark thực tế có 50 câu: 5 factoid, 23 multi-hop và 22 cross-doc.
 
 Trong lần chạy mới, GraphRAG có chất lượng thấp hơn Flat RAG ở cả ba tiêu chí; token usage cao hơn khoảng 5.16 token/câu và latency cao hơn khoảng 0.012 giây. Đây là kết quả quan trọng: GraphRAG không tự động tốt hơn nếu graph extraction còn thưa, seed matching thất bại hoặc quan hệ cần thiết chưa nằm trong allowlist.
 
+So với lần chạy trước khi bật near-dedup, GraphRAG cải thiện comprehensiveness từ 2.360 lên 2.480, faithfulness từ 2.580 lên 2.760 và multi-hop reasoning từ 2.340 lên 2.480. Đổi lại, latency tăng 0.044 giây và token usage tăng 53.36 token/câu. Vì chỉ 1/1.500 bài bị loại, kết quả cho thấy near-dedup có tác động tích cực nhưng chưa đủ để GraphRAG vượt Flat RAG.
+
 ## 5. Hai dạng failure case
 
 Flat RAG có thể thất bại khi câu hỏi yêu cầu nối nhiều chunk bằng quan hệ trung gian. Top-k vector có thể lấy các bài nói về cùng chủ đề nhưng không giữ được đường đi A → B → C. GraphRAG có tiềm năng khắc phục bằng seed extraction, BFS và provenance trên cạnh.

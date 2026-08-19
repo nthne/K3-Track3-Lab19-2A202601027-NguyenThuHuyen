@@ -18,6 +18,8 @@ Pipeline đã chạy trên 50 câu hỏi Golden Dataset gồm 5 factoid, 23 mult
 
 GraphRAG dùng nhiều hơn khoảng 5.16 token/câu và latency cao hơn khoảng 0.012 giây, đồng thời điểm chất lượng thấp hơn trong lần chạy này. Vì vậy kết luận thực nghiệm là GraphRAG có lợi thế về cấu trúc/provenance, nhưng graph coverage cần được cải thiện trước khi vượt Flat RAG về chất lượng.
 
+So với lần chạy trước khi có near-dedup, điểm GraphRAG tăng từ 2.360 lên 2.480 ở comprehensiveness, từ 2.580 lên 2.760 ở faithfulness và từ 2.340 lên 2.480 ở multi-hop reasoning. Tuy nhiên latency tăng từ 1.762 lên 1.806 giây và token usage tăng từ 597.52 lên 650.88. Near-dedup chỉ loại 1 trong 1.500 bài sau scale guard, nên tác động tích cực ở mức vừa phải; GraphRAG vẫn thấp hơn Flat RAG về cả ba tiêu chí chất lượng.
+
 ## 2. Chuyển từ Grok/Groq sang OpenAI
 
 Trong quá trình chạy ban đầu, các call tới Groq gặp lỗi xác thực API key và retry kéo dài, khiến các cell coreference và extraction không hoàn thành ổn định. Vì vậy pipeline được chuyển sang OpenAI để dùng một provider thống nhất.

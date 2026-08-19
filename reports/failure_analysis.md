@@ -18,6 +18,8 @@ Phân tích dựa trên outputs/graphrag_eval_results.csv, gồm 50 câu hỏi:
 
 GraphRAG có chất lượng thấp hơn và dùng nhiều hơn khoảng 5.16 token/câu, với latency cao hơn khoảng 0.012 giây trong lần chạy mới.
 
+So với lần chạy trước khi bổ sung near-dedup, điểm GraphRAG tăng lần lượt 0.12 ở comprehensiveness, 0.18 ở faithfulness và 0.14 ở multi-hop reasoning. Tuy nhiên latency tăng 0.044 giây và token usage tăng 53.36 token/câu. Vì near-dedup chỉ loại 1/1.500 bài sau scale guard, mức cải thiện cần được xem là tín hiệu tích cực nhưng còn nhỏ; thêm nữa, độ dao động của LLM Judge khiến không nên quy toàn bộ thay đổi cho một bài bị loại.
+
 ## 2. Ca lỗi Flat RAG: mất liên kết giữa nhiều tài liệu
 
 ### Hiện tượng

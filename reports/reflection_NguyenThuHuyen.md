@@ -30,6 +30,8 @@ Benchmark 50 câu cho kết quả:
 
 Kết quả cho thấy GraphRAG không nên được đánh giá chỉ bằng trực giác kiến trúc. GraphRAG có lợi thế về cấu trúc, provenance và khả năng mở rộng reasoning, nhưng chất lượng phụ thuộc mạnh vào graph coverage. Trong dataset hiện tại, Flat RAG vẫn tốt hơn về điểm Judge và GraphRAG cũng dùng nhiều token hơn một chút.
 
+Near-dedup giúp điểm GraphRAG tăng so với lần chạy trước: comprehensiveness từ 2.360 lên 2.480, faithfulness từ 2.580 lên 2.760 và multi-hop reasoning từ 2.340 lên 2.480. Tuy nhiên GraphRAG vẫn chưa vượt Flat RAG; latency tăng lên 1.806 giây và token usage lên 650.88. Bài học là một cải tiến dữ liệu nhỏ có thể giúp chất lượng, nhưng cần đánh giá đồng thời quality, cost và latency.
+
 ## 4. Action plan cho đồ án thực tế
 
 ### Khi nào cần GraphRAG?
