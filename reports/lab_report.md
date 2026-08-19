@@ -10,13 +10,13 @@ Pipeline đã chạy trên 50 câu hỏi Golden Dataset gồm 5 factoid, 23 mult
 
 | Metric | Flat RAG | GraphRAG |
 |---|---:|---:|
-| Comprehensiveness | 2.640 | 2.360 |
-| Faithfulness | 2.940 | 2.580 |
-| Multi-hop reasoning | 2.640 | 2.340 |
-| Latency (s) | 1.807 | 1.762 |
-| Token usage | 642.44 | 597.52 |
+| Comprehensiveness | 2.660 | 2.480 |
+| Faithfulness | 2.960 | 2.760 |
+| Multi-hop reasoning | 2.660 | 2.480 |
+| Latency (s) | 1.794 | 1.806 |
+| Token usage | 645.72 | 650.88 |
 
-GraphRAG dùng ít hơn khoảng 44.92 token/câu và latency thấp hơn khoảng 0.045 giây, nhưng điểm chất lượng thấp hơn trong lần chạy này. Vì vậy kết luận thực nghiệm là GraphRAG có lợi thế về cấu trúc/provenance và chi phí context, nhưng graph coverage cần được cải thiện trước khi vượt Flat RAG về chất lượng.
+GraphRAG dùng nhiều hơn khoảng 5.16 token/câu và latency cao hơn khoảng 0.012 giây, đồng thời điểm chất lượng thấp hơn trong lần chạy này. Vì vậy kết luận thực nghiệm là GraphRAG có lợi thế về cấu trúc/provenance, nhưng graph coverage cần được cải thiện trước khi vượt Flat RAG về chất lượng.
 
 ## 2. Chuyển từ Grok/Groq sang OpenAI
 
@@ -73,7 +73,7 @@ Khi scale lên khoảng 350MB, cần streaming ingestion, async batch extraction
 
 ## 6. Reflection và action plan
 
-Các module trong bài được mapping vào các hàm preprocessing, extraction, ingestion, resolution, retrieval và evaluation. Community Detection bằng NetworkX và Self-Correction đã được triển khai. Near-dedup chưa được bật trong bản notebook này; đây là hướng mở rộng sau exact dedup.
+Các module trong bài được mapping vào các hàm preprocessing, extraction, ingestion, resolution, retrieval và evaluation. Community Detection bằng NetworkX, Self-Correction và near-dedup bằng SimHash đã được triển khai. Near-dedup thực tế loại 1 bài gần trùng sau exact dedup.
 
 Đối với đồ án thực tế, GraphRAG chỉ nên được chọn khi câu hỏi cần multi-hop, cross-document hoặc provenance có cấu trúc. Với factoid đơn giản, Flat/Hybrid RAG có thể rẻ và đủ tốt hơn.
 

@@ -10,13 +10,13 @@ Phân tích dựa trên outputs/graphrag_eval_results.csv, gồm 50 câu hỏi:
 
 | Metric | Flat RAG | GraphRAG |
 |---|---:|---:|
-| Comprehensiveness | 2.640 | 2.360 |
-| Faithfulness | 2.940 | 2.580 |
-| Multi-hop reasoning | 2.640 | 2.340 |
-| Latency (s) | 1.807 | 1.762 |
-| Token usage | 642.44 | 597.52 |
+| Comprehensiveness | 2.660 | 2.480 |
+| Faithfulness | 2.960 | 2.760 |
+| Multi-hop reasoning | 2.660 | 2.480 |
+| Latency (s) | 1.794 | 1.806 |
+| Token usage | 645.72 | 650.88 |
 
-GraphRAG tiết kiệm token và có latency trung bình thấp hơn, nhưng chất lượng thấp hơn trong lần chạy này.
+GraphRAG có chất lượng thấp hơn và dùng nhiều hơn khoảng 5.16 token/câu, với latency cao hơn khoảng 0.012 giây trong lần chạy mới.
 
 ## 2. Ca lỗi Flat RAG: mất liên kết giữa nhiều tài liệu
 
@@ -65,7 +65,9 @@ GraphRAG vẫn trả lời được một phần nhờ vector context, nhưng c�
 - Dùng hybrid retrieval có diversity theo tài liệu và entity.
 - Ghi provenance đầy đủ để kiểm tra edge nào gây mất reasoning.
 
-## 4. Super-node và temporal truncation
+## 4. Near-dedup, Super-node và temporal truncation
+
+Near-dedup bằng SimHash đã chạy sau exact dedup: 1.500 bài được giữ lại 1.499 bài, loại 1 bài gần trùng. Test nhỏ cũng xác nhận 2 bài gần trùng được rút còn 1. Cơ chế này giảm duplicate context nhưng không thay thế exact hash.
 
 SUPER_NODE_DEGREE = 100, SUPER_NODE_EDGE_CAP = 50, GLOBAL_EDGE_CAP = 250 và giới hạn context 14.000 ký tự giúp tránh nổ context. Tuy nhiên, chọn 50 cạnh mới nhất có thể bỏ qua sự kiện lịch sử cũ. Trong benchmark hiện tại, graph_supernode_events bằng 0 cho cả 50 câu, nên chưa có bằng chứng thực nghiệm rằng cap đã ảnh hưởng đến một câu cụ thể.
 

@@ -22,13 +22,13 @@ Benchmark 50 câu cho kết quả:
 
 | Metric | Flat RAG | GraphRAG |
 |---|---:|---:|
-| Comprehensiveness | 2.640 | 2.360 |
-| Faithfulness | 2.940 | 2.580 |
-| Multi-hop reasoning | 2.640 | 2.340 |
-| Latency (s) | 1.807 | 1.762 |
-| Token usage | 642.44 | 597.52 |
+| Comprehensiveness | 2.660 | 2.480 |
+| Faithfulness | 2.960 | 2.760 |
+| Multi-hop reasoning | 2.660 | 2.480 |
+| Latency (s) | 1.794 | 1.806 |
+| Token usage | 645.72 | 650.88 |
 
-Kết quả cho thấy GraphRAG không nên được đánh giá chỉ bằng trực giác kiến trúc. GraphRAG có lợi thế về cấu trúc, provenance và khả năng mở rộng reasoning, nhưng chất lượng phụ thuộc mạnh vào graph coverage. Trong dataset hiện tại, Flat RAG vẫn tốt hơn về điểm Judge.
+Kết quả cho thấy GraphRAG không nên được đánh giá chỉ bằng trực giác kiến trúc. GraphRAG có lợi thế về cấu trúc, provenance và khả năng mở rộng reasoning, nhưng chất lượng phụ thuộc mạnh vào graph coverage. Trong dataset hiện tại, Flat RAG vẫn tốt hơn về điểm Judge và GraphRAG cũng dùng nhiều token hơn một chút.
 
 ## 4. Action plan cho đồ án thực tế
 
@@ -58,7 +58,7 @@ Mỗi edge cần lưu source_chunk_id, published_date, evidence và confidence. 
 - Self-correction retrieval theo tuyến Hop 2 → Hop 3 → vector fallback.
 - Chính sách super-node mitigation và test riêng đã có.
 
-Near-dedup bằng MinHash/LSH hoặc SimHash chưa được triển khai; đây là hướng mở rộng tiếp theo.
+Near-dedup bằng SimHash đã được triển khai và chạy thật, loại 1 bài gần trùng sau exact dedup. MinHash/LSH vẫn là hướng mở rộng khác nếu cần tối ưu thêm.
 
 ## 6. Cam kết chất lượng
 

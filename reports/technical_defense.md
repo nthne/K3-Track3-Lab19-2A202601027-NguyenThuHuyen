@@ -33,13 +33,13 @@ Benchmark thực tế có 50 câu: 5 factoid, 23 multi-hop và 22 cross-doc.
 
 | Metric | Flat RAG | GraphRAG |
 |---|---:|---:|
-| Comprehensiveness | 2.640 | 2.360 |
-| Faithfulness | 2.940 | 2.580 |
-| Multi-hop reasoning | 2.640 | 2.340 |
-| Latency (s) | 1.807 | 1.762 |
-| Token usage | 642.44 | 597.52 |
+| Comprehensiveness | 2.660 | 2.480 |
+| Faithfulness | 2.960 | 2.760 |
+| Multi-hop reasoning | 2.660 | 2.480 |
+| Latency (s) | 1.794 | 1.806 |
+| Token usage | 645.72 | 650.88 |
 
-GraphRAG dùng ít token hơn khoảng 44.92 token/câu và latency trung bình thấp hơn khoảng 0.045 giây, nhưng điểm chất lượng thấp hơn. Đây là kết quả quan trọng: GraphRAG không tự động tốt hơn nếu graph extraction còn thưa, seed matching thất bại hoặc quan hệ cần thiết chưa nằm trong allowlist.
+Trong lần chạy mới, GraphRAG có chất lượng thấp hơn Flat RAG ở cả ba tiêu chí; token usage cao hơn khoảng 5.16 token/câu và latency cao hơn khoảng 0.012 giây. Đây là kết quả quan trọng: GraphRAG không tự động tốt hơn nếu graph extraction còn thưa, seed matching thất bại hoặc quan hệ cần thiết chưa nằm trong allowlist.
 
 ## 5. Hai dạng failure case
 
@@ -64,4 +64,4 @@ Với dữ liệu khoảng 350MB, bottleneck đầu tiên thường là I/O, emb
 
 Coreference, NER/RE, seed extraction, answer generation, sufficiency check và judge đều dùng OpenAI client. Embedding cũng dùng text-embedding-3-small; vector được chuẩn hóa trước khi đưa vào FAISS inner-product index. API key được đọc từ Colab Secrets/environment.
 
-Pipeline đáp ứng kiến trúc Production GraphRAG: preprocessing, strict extraction, entity resolution có audit, bulk Neo4j ingestion bằng UNWIND, hybrid retrieval, provenance, evaluation và self-correction. Kết quả benchmark cho thấy cần cải thiện graph coverage và seed/relation recall trước khi kết luận GraphRAG vượt Flat RAG về chất lượng.
+Pipeline đáp ứng kiến trúc Production GraphRAG: preprocessing, exact và near dedup, strict extraction, entity resolution có audit, bulk Neo4j ingestion bằng UNWIND, hybrid retrieval, provenance, evaluation và self-correction. Kết quả benchmark cho thấy cần cải thiện graph coverage và seed/relation recall trước khi kết luận GraphRAG vượt Flat RAG về chất lượng.
